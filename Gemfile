@@ -32,6 +32,9 @@ gem "rack-cors", "~> 2.0", ">= 2.0.1"
 # Authentication solution for Rails with Warden [https://github.com/heartcombo/devise]
 gem "devise", "~> 4.9"
 
+# JWT token authentication for Devise [https://github.com/waiting-for-dev/devise-jwt]
+gem "devise-jwt", "~> 0.11.0"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[mri windows]
