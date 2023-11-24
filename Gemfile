@@ -35,6 +35,12 @@ gem "devise", "~> 4.9"
 # JWT token authentication for Devise [https://github.com/waiting-for-dev/devise-jwt]
 gem "devise-jwt", "~> 0.11.0"
 
+# Framework for building REST-like APIs in Ruby [https://github.com/ruby-grape/grape]
+gem "grape", "~> 2.0"
+
+# Model and other object representations for API endpoints in Grape [https://github.com/ruby-grape/grape-entity]
+gem "grape-entity", "~> 1.0"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[mri windows]
