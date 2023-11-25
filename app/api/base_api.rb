@@ -4,4 +4,5 @@ class BaseAPI < Grape::API
   version :v1, using: :path
 
   mount V1::GenreResource
+  mount V1::AuthorResource
 end
