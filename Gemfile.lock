@@ -192,6 +192,8 @@ GEM
       racc (~> 1.4)
     orm_adapter (0.5.0)
     parallel (1.23.0)
+    paranoia (2.6.3)
+      activerecord (>= 5.1, < 7.2)
     parser (3.2.2.4)
       ast (~> 2.4.1)
       racc
@@ -341,6 +343,7 @@ DEPENDENCIES
   grape (~> 2.0)
   grape-entity (~> 1.0)
   image_processing (~> 1.2)
+  paranoia (~> 2.6)
   pg (~> 1.1)
   puma (>= 5.0)
   pundit (~> 2.3)

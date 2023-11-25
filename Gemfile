@@ -44,6 +44,9 @@ gem "grape-entity", "~> 1.0"
 # Object-oriented authorization for Rails applications [https://github.com/varvet/pundit]
 gem "pundit", "~> 2.3"
 
+# Soft-deletes for ActiveRecord models [https://github.com/rubysherpas/paranoia]
+gem "paranoia", "~> 2.6"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[mri windows]
