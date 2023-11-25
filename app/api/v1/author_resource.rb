@@ -6,12 +6,16 @@ class V1::AuthorResource < BaseAPI
       requires :description, type: String, desc: "Author description"
     end
     post do
-      author = Author.create!(declared(params))
+      authenticate!
+      author = Author.new(declared(params))
+      authorize author, :create?
+      author.save!
       present author, with: V1::Entities::AuthorEntity
     end
 
     desc "List all Authors"
     get do
+      authorize Author, :index?
       authors = Author.all
       present authors, with: V1::Entities::AuthorEntity
     end
@@ -23,6 +27,7 @@ class V1::AuthorResource < BaseAPI
 
       desc "Get an Author"
       get do
+        authorize @author, :show?
         present @author, with: V1::Entities::AuthorEntity
       end
 
@@ -32,12 +37,16 @@ class V1::AuthorResource < BaseAPI
         optional :description, type: String, desc: "Author description"
       end
       put do
+        authenticate!
+        authorize @author, :update?
         @author.update!(declared(params, include_missing: false))
         present @author, with: V1::Entities::AuthorEntity
       end
 
       desc "Delete an Author"
       delete do
+        authenticate!
+        authorize @author, :destroy?
         @author.destroy
         status 200
       end
