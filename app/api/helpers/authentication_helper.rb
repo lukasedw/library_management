@@ -5,6 +5,8 @@ module Helpers::AuthenticationHelper
     unauthorized_error!
   end
 
+  private
+
   def decode_user_from_token
     return nil unless token
 

@@ -10,6 +10,7 @@ RSpec.describe V1::BookResource, type: :request do
   let(:endpoint) { "/api/v1/books" }
   let(:member_endpoint) { "#{endpoint}/#{book_id}" }
   let(:user) { create(:user, :librarian) }
+  let(:user_member) { create(:user) }
   let(:auth_headers) do
     Devise::JWT::TestHelpers.auth_headers({}, user)
   end
@@ -83,6 +84,20 @@ RSpec.describe V1::BookResource, type: :request do
         }.not_to change(Book, :count)
 
         expect(response.status).to eq(401)
+      end
+    end
+
+    context "when the user is not authorized" do
+      let(:user) { user_member }
+
+      it "returns status 403" do
+        expect {
+          post endpoint,
+            params: book_params,
+            headers: auth_headers
+        }.not_to change(Book, :count)
+
+        expect(response.status).to eq(403)
       end
     end
   end
@@ -182,6 +197,20 @@ RSpec.describe V1::BookResource, type: :request do
         expect(response.status).to eq(401)
       end
     end
+
+    context "when the user is not authorized" do
+      let(:user) { user_member }
+
+      it "returns status 403" do
+        expect {
+          put member_endpoint,
+            params: book_params,
+            headers: auth_headers
+        }.not_to change(Book, :count)
+
+        expect(response.status).to eq(403)
+      end
+    end
   end
 
   describe "DELETE /books/:id" do
@@ -212,6 +241,18 @@ RSpec.describe V1::BookResource, type: :request do
         }.not_to change(Book, :count)
 
         expect(response.status).to eq(401)
+      end
+    end
+
+    context "when the user is not authorized" do
+      let(:user) { user_member }
+
+      it "returns status 403" do
+        expect {
+          delete member_endpoint, headers: auth_headers
+        }.not_to change(Book, :count)
+
+        expect(response.status).to eq(403)
       end
     end
   end

@@ -9,11 +9,11 @@ class ApplicationPolicy
   end
 
   def index?
-    false
+    true
   end
 
   def show?
-    false
+    true
   end
 
   def create?
@@ -49,5 +49,15 @@ class ApplicationPolicy
     private
 
     attr_reader :user, :scope
+  end
+
+  private
+
+  def librarian?
+    user.librarian?
+  end
+
+  def member?
+    user.member?
   end
 end

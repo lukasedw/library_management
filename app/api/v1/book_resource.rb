@@ -11,12 +11,15 @@ class V1::BookResource < BaseAPI
     end
     post do
       authenticate!
-      book = Book.create!(declared(params))
+      book = Book.new(declared(params))
+      authorize book, :create?
+      book.save!
       present book, with: V1::Entities::BookEntity
     end
 
     desc "List all Books"
     get do
+      authorize Book, :index?
       books = Book.all
       present books, with: V1::Entities::BookEntity
     end
@@ -28,6 +31,7 @@ class V1::BookResource < BaseAPI
 
       desc "Get a Book"
       get do
+        authorize @book, :show?
         present @book, with: V1::Entities::BookEntity
       end
 
@@ -42,6 +46,7 @@ class V1::BookResource < BaseAPI
       end
       put do
         authenticate!
+        authorize @book, :update?
         @book.update!(declared(params, include_missing: false))
         present @book, with: V1::Entities::BookEntity
       end
@@ -49,6 +54,7 @@ class V1::BookResource < BaseAPI
       desc "Delete a Book"
       delete do
         authenticate!
+        authorize @book, :destroy?
         @book.destroy
         status 200
       end

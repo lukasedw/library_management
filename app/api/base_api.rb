@@ -5,6 +5,7 @@ class BaseAPI < Grape::API
   prefix :api
   version :v1, using: :path
 
+  helpers Pundit::Authorization
   helpers ::Helpers::AuthenticationHelper
 
   mount V1::GenreResource
