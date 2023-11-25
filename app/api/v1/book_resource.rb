@@ -12,6 +12,7 @@ class V1::BookResource < BaseAPI
       requires :genre_id, type: Integer, desc: "ID of the genre of the book"
     end
     post do
+      authenticate!
       book = Book.create!(declared(params))
       present book, with: V1::Entities::BookEntity
     end
@@ -42,12 +43,14 @@ class V1::BookResource < BaseAPI
         optional :genre_id, type: Integer, desc: "ID of the genre of the book"
       end
       put do
+        authenticate!
         @book.update!(declared(params, include_missing: false))
         present @book, with: V1::Entities::BookEntity
       end
 
       desc "Delete a Book"
       delete do
+        authenticate!
         @book.destroy
         status 200
       end
