@@ -35,7 +35,7 @@ RSpec.describe V1::AuthorResource, type: :request do
     context "when only some required parameters are provided" do
       it "does not create a book and returns status 400" do
         expect {
-          post endpoint, params: {name: "Jane Doe" }
+          post endpoint, params: {name: "Jane Doe"}
         }.not_to change(Book, :count)
 
         expect(response.status).to eq(400)

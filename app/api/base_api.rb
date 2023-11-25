@@ -5,4 +5,5 @@ class BaseAPI < Grape::API
 
   mount V1::GenreResource
   mount V1::AuthorResource
+  mount V1::BookResource
 end
