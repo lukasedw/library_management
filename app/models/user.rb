@@ -5,4 +5,8 @@ class User < ApplicationRecord
     :recoverable, :validatable, :jwt_authenticatable, jwt_revocation_strategy: self
 
   has_many :book_transactions, inverse_of: :user
+
+  validates :first_name, :last_name, :role, presence: true
+
+  enum role: {librarian: 0, member: 1}
 end

@@ -8,4 +8,5 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-FactoryBot.create(:user, email: "test@test.com")
+FactoryBot.create(:user, :librarian, first_name: "Librarian", email: "librarian@test.com")
+FactoryBot.create(:user, :member, last_name: "Member", email: "member@test.com")
