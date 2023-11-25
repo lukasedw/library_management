@@ -14,7 +14,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = 'dfddaf946b682cd899b3e4c7c32e791d16d78b32359bf8e8eb4ce4cdf7ffb870db228a9ae6fcdf337363e77e3097e5d6c669bdcba572dc11a74c0f614fcfd437'
+  config.secret_key = "30a7f7aa313afc2fabbeeb4fca8ef72b948ded7ac1764ce906c8a698451d1a66d16edcabd91a694c06927310e40eed8120fb1fcf47fa301d22376d454c194fbc"
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -265,6 +265,8 @@ Devise.setup do |config|
   # The "*/*" below is required to match Internet Explorer requests.
   # config.navigational_formats = ['*/*', :html, :turbo_stream]
 
+  config.navigational_formats = []
+
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete
 
@@ -310,4 +312,19 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
+
+  config.jwt do |jwt|
+    # jwt.secret = "secret"
+    jwt.secret = OpenSSL::PKey::RSA.new(File.read("private_key.pem"))
+    jwt.algorithm = "RS256"
+    # jwt.algorithm = "RS256"
+
+    jwt.dispatch_requests = [
+      ["POST", %r{^/api/v1/authentication/sign_in$}]
+    ]
+    jwt.revocation_requests = [
+      ["DELETE", %r{^/api/v1/authentication/sign_out}]
+    ]
+    jwt.expiration_time = 2.days.to_i
+  end
 end
