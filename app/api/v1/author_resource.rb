@@ -1,6 +1,4 @@
 class V1::AuthorResource < BaseAPI
-  include ErrorHandler
-
   namespace :authors do
     desc "Create an Author"
     params do

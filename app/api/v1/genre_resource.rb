@@ -1,6 +1,4 @@
 class V1::GenreResource < BaseAPI
-  include ErrorHandler
-
   namespace :genres do
     desc "Create a Genre"
     params do

@@ -1,6 +1,4 @@
 class V1::BookResource < BaseAPI
-  include ErrorHandler
-
   namespace :books do
     desc "Create a Book"
     params do

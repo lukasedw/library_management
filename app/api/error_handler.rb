@@ -9,7 +9,5 @@ module ErrorHandler
     rescue_from ActiveRecord::RecordInvalid do |e|
       error_response(message: e.record.errors.full_messages, status: 422)
     end
-
-    # Add other ActiveRecord error types as needed
   end
 end

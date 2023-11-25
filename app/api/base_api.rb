@@ -1,4 +1,6 @@
 class BaseAPI < Grape::API
+  include ErrorHandler
+
   format :json
   prefix :api
   version :v1, using: :path
