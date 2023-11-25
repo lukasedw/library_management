@@ -56,6 +56,8 @@ group :development, :test do
   gem "factory_bot_rails"
   # Generate fake data for tests and seeds [https://github.com/faker-ruby/faker]
   gem "faker"
+  # Provides simple one-liner tests for common Rails functionalities [https://github.com/thoughtbot/shoulda-matchers]
+  gem "shoulda-matchers", "~> 5.3"
 end
 
 group :development do
@@ -64,3 +66,4 @@ group :development do
   # Enforce coding style guidelines with a Ruby style guide linter [https://github.com/testdouble/standard]
   gem "standard", "~> 1.32"
 end
+
