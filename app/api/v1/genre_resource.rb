@@ -5,11 +5,15 @@ class V1::GenreResource < BaseAPI
       requires :name, type: String, desc: "Genre name"
     end
     post do
-      genre = Genre.create!(declared(params))
+      authenticate!
+      genre = Genre.new(declared(params))
+      authorize genre, :create?
+      genre.save!
       present genre, with: V1::Entities::GenreEntity
     end
     desc "List all Genres"
     get do
+      authorize Genre, :index?
       genres = Genre.all
       present genres, with: V1::Entities::GenreEntity
     end
@@ -19,6 +23,7 @@ class V1::GenreResource < BaseAPI
       end
       desc "Get a Genre"
       get do
+        authorize @genre, :show?
         present @genre, with: V1::Entities::GenreEntity
       end
 
@@ -27,11 +32,15 @@ class V1::GenreResource < BaseAPI
         optional :name, type: String, desc: "Genre name"
       end
       put do
+        authenticate!
+        authorize @genre, :update?
         @genre.update!(declared(params, include_missing: false))
         present @genre, with: V1::Entities::GenreEntity
       end
       desc "Delete a Genre"
       delete do
+        authenticate!
+        authorize @genre, :destroy?
         @genre.destroy
         status 200
       end
