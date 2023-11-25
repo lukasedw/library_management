@@ -66,4 +66,3 @@ group :development do
   # Enforce coding style guidelines with a Ruby style guide linter [https://github.com/testdouble/standard]
   gem "standard", "~> 1.32"
 end
-
