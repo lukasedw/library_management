@@ -10,3 +10,5 @@
 
 FactoryBot.create(:user, :librarian, first_name: "Librarian", email: "librarian@test.com")
 FactoryBot.create(:user, :member, last_name: "Member", email: "member@test.com")
+
+FactoryBot.create_list(:book, 10)
