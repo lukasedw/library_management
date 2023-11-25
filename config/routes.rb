@@ -8,5 +8,5 @@ Rails.application.routes.draw do
       registrations: "users/registrations"
     }
 
-  mount API, at: "/"
+  mount BaseAPI, at: "/"
 end
