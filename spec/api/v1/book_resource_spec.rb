@@ -256,4 +256,64 @@ RSpec.describe V1::BookResource, type: :request do
       end
     end
   end
+
+  describe "POST /books/:id/borrow" do
+    let(:user) { user_member }
+
+    let(:book_transaction) { user.book_transactions.last }
+
+    context "when the book exists" do
+      it "borrows the book" do
+        post "#{member_endpoint}/borrow",
+          headers: auth_headers
+
+        expect(JSON.parse(response.body)["message"]).to eq("Book checked out successfully")
+        expect(book_transaction.borrowed?).to be_truthy
+        expect(response.status).to eq(200)
+      end
+    end
+
+    context "when the book does not exist" do
+      let(:book_id) { 0 }
+
+      it "returns a 404 status" do
+        post "#{member_endpoint}/borrow", headers: auth_headers
+
+        expect(response.status).to eq(404)
+      end
+    end
+
+    context "when the user is not authenticated" do
+      it "returns status 401" do
+        post "#{member_endpoint}/borrow"
+
+        expect(book_transaction).to be_nil
+        expect(response.status).to eq(401)
+      end
+    end
+
+    context "when the user is not authorized" do
+      let(:user) { create(:user, :librarian) }
+
+      it "returns status 403" do
+        post "#{member_endpoint}/borrow",
+          headers: auth_headers
+
+        expect(book_transaction).to be_nil
+        expect(response.status).to eq(403)
+      end
+    end
+
+    context "when the book is not available" do
+      before { create(:book_transaction, book: book, user: user) }
+
+      it "returns status 422" do
+        post "#{member_endpoint}/borrow",
+          headers: auth_headers
+
+        expect(JSON.parse(response.body)["message"]).to eq("Book is not available for checkout")
+        expect(response.status).to eq(422)
+      end
+    end
+  end
 end

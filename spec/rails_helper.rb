@@ -67,6 +67,10 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
 
   config.include RSpec::Rails::RequestExampleGroup, type: :request, file_path: /spec\/api/
+
+  config.after(:each) do
+    Faker::UniqueGenerator.clear
+  end
 end
 
 Shoulda::Matchers.configure do |config|

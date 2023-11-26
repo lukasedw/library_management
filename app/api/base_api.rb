@@ -7,6 +7,7 @@ class BaseAPI < Grape::API
 
   helpers Pundit::Authorization
   helpers ::Helpers::AuthenticationHelper
+  helpers ::Helpers::ResponseHelpers
 
   mount V1::GenreResource
   mount V1::AuthorResource

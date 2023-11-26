@@ -58,6 +58,18 @@ class V1::BookResource < BaseAPI
         @book.destroy
         status 200
       end
+
+      desc "Borrow a Book"
+      post :borrow do
+        authenticate!
+        authorize @book, :borrow?
+        checkout_result = BookCheckoutService.call(@book.id, current_user.id)
+        if checkout_result[:success]
+          success_render!(checkout_result[:message])
+        else
+          error_render!(checkout_result[:message])
+        end
+      end
     end
   end
 end

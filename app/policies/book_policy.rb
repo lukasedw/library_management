@@ -11,6 +11,10 @@ class BookPolicy < ApplicationPolicy
     librarian?
   end
 
+  def borrow?
+    member?
+  end
+
   class Scope < Scope
     def resolve
       scope.all
