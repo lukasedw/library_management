@@ -47,8 +47,11 @@ gem "pundit", "~> 2.3"
 # Soft-deletes for ActiveRecord models [https://github.com/rubysherpas/paranoia]
 gem "paranoia", "~> 2.6"
 
-#
+# State machine for Ruby classes [https://github.com/aasm/aasm]
 gem "aasm", "~> 5.5"
+
+# Hook into ActiveRecord's commit callbacks from non-model classes (work with aasm) [https://github.com/Envek/after_commit_everywhere]
+gem "after_commit_everywhere", "~> 1.3"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -69,5 +72,3 @@ group :development do
   # Enforce coding style guidelines with a Ruby style guide linter [https://github.com/testdouble/standard]
   gem "standard", "~> 1.32"
 end
-
-gem "after_commit_everywhere", "~> 1.3"
