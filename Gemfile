@@ -47,6 +47,9 @@ gem "pundit", "~> 2.3"
 # Soft-deletes for ActiveRecord models [https://github.com/rubysherpas/paranoia]
 gem "paranoia", "~> 2.6"
 
+#
+gem "aasm", "~> 5.5"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[mri windows]
@@ -66,3 +69,5 @@ group :development do
   # Enforce coding style guidelines with a Ruby style guide linter [https://github.com/testdouble/standard]
   gem "standard", "~> 1.32"
 end
+
+gem "after_commit_everywhere", "~> 1.3"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_25_122803) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_25_174135) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -66,6 +66,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_25_122803) do
     t.datetime "checkout_at", null: false
     t.date "return_at", null: false
     t.datetime "returned_at"
+    t.integer "state", default: 0
     t.index ["book_id"], name: "index_book_transactions_on_book_id"
     t.index ["user_id"], name: "index_book_transactions_on_user_id"
   end
@@ -80,6 +81,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_25_122803) do
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "state", default: 0
     t.index ["author_id"], name: "index_books_on_author_id"
     t.index ["deleted_at"], name: "index_books_on_deleted_at"
     t.index ["genre_id"], name: "index_books_on_genre_id"
