@@ -29,6 +29,9 @@ Then add the `RAILS_MASTER_KEY` env to your system or IDE, or create a master ke
 f6b166af694ff3d7cd51202c6542cc34
 ```
 
+**[Postman collection](https://www.postman.com/restless-rocket-938874/workspace/library-system/collection/27430268-24c1f1a7-dfef-4b87-8346-b4971332149a?action=share&creator=27430268)**
+
+
 ### Prerequisites
 
 - Ruby 3.2.2
