@@ -315,7 +315,7 @@ Devise.setup do |config|
 
   config.jwt do |jwt|
     # jwt.secret = "secret"
-    jwt.secret = OpenSSL::PKey::RSA.new(File.read("private_key.pem"))
+    jwt.secret = OpenSSL::PKey::RSA.new(Rails.application.credentials.devise_jwt_private_key)
     jwt.algorithm = "RS256"
     # jwt.algorithm = "RS256"
 
