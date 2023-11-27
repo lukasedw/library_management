@@ -1,24 +1,35 @@
-# README
+# Library Management System
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Overview
 
-Things you may want to cover:
+This Ruby on Rails application provides a comprehensive solution for managing a library's book inventory and user borrowings. It features distinct interfaces and functionalities for two types of users: Librarians and Members. Additionally, it includes a RESTful API for CRUD operations on authors, genres and books. It is possible to borrow a book if you are a member and return it if you are a librarian.
 
-* Ruby version
+## Technology Stack
 
-* System dependencies
+- **Backend**: Ruby on Rails
+- **Database**: PostgreSQL
+- **API**: RESTful API with Grape
+- **Testing**: RSpec
 
-* Configuration
+## Getting Started
 
-* Database creation
+Clone the repository and install the dependencies and run db setup:
 
-* Database initialization
+```
+bundle install
+rails db:setup
+```
 
-* How to run the test suite
+Copy the `.env.development` file and rename it to `.env.development.local` and the PostgreSQL database credentials.
+Do the same process for the `.env.test`.
 
-* Services (job queues, cache servers, search engines, etc.)
+Then add the `RAILS_MASTER_KEY` env to your system or IDE, or create a master key file `config/master.key` and add the following key:
 
-* Deployment instructions
+```
+f6b166af694ff3d7cd51202c6542cc34
+```
 
-* ...
+### Prerequisites
+
+- Ruby 3.2.2
+- PostgreSQL 13+
