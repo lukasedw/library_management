@@ -305,7 +305,21 @@ RSpec.describe V1::BookResource, type: :request do
     end
 
     context "when the book is not available" do
-      before { create(:book_transaction, book: book, user: user) }
+      let!(:book_transaction) { create(:book_transaction, book: book, user: user) }
+
+      it "returns status 422" do
+        post "#{member_endpoint}/borrow",
+          headers: auth_headers
+
+        expect(JSON.parse(response.body)["message"]).to eq("Book is not available for checkout")
+        expect(response.status).to eq(422)
+      end
+    end
+
+    context "when there is no available books" do
+      let(:book) { create(:book, title: book_title, total_copies: 1) }
+      let(:user1) { create(:user) }
+      let!(:book_transaction) { create(:book_transaction, book: book, user: user1) }
 
       it "returns status 422" do
         post "#{member_endpoint}/borrow",
