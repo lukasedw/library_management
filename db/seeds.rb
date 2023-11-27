@@ -20,4 +20,3 @@ users.each do |user|
     FactoryBot.create(:book_transaction, user: user, book: book)
   end
 end
-

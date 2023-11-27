@@ -98,7 +98,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_25_174135) do
   create_table "users", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
-    t.integer "role", limit: 2
+    t.integer "role", limit: 2, default: 0, null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

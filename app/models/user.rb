@@ -8,5 +8,5 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, :role, presence: true
 
-  enum role: {librarian: 0, member: 1}
+  enum role: {librarian: 1, member: 0}
 end
