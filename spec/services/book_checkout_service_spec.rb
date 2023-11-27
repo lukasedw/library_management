@@ -5,12 +5,10 @@ RSpec.describe BookCheckoutService do
   let(:book) { create(:book) }
   let(:user) { create(:user) }
 
-  let(:instance) { described_class.new(book.id, user.id) }
+  subject { described_class.call(book.id, user.id) }
 
   describe "#call" do
     context "when the book is available" do
-      subject { instance.call }
-
       context "basic checkout" do
         it "checks out the book" do
           expect { subject }.to change(BookTransaction, :count).by(1)
@@ -44,7 +42,7 @@ RSpec.describe BookCheckoutService do
         threads = users.map do |map_user|
           Thread.new do
             barrier.wait
-            described_class.new(book.id, map_user.id).call
+            described_class.call(book.id, map_user.id)
           end
         end
 

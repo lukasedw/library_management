@@ -11,10 +11,11 @@ class BaseAPI < Grape::API
   mount V1::GenreResource
   mount V1::AuthorResource
   mount V1::BookResource
+  mount V1::BookTransactionResource
 
   add_swagger_documentation(
     info: {
-      title: "Library Management System API",
+      title: "Library Management System API"
     },
     api_version: "v1",
     base_path: "/api",

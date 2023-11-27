@@ -6,6 +6,6 @@ class V1::Entities::BookEntity < Grape::Entity
   expose :description, documentation: {type: "String", desc: "Description of the book"}
   expose :isbn, documentation: {type: "String", desc: "ISBN of the book"}
   expose :total_copies, documentation: {type: "Integer", desc: "Total copies of the book"}
-  expose :author_id, documentation: {type: "Integer", desc: "ID of the author of the book"}
-  expose :genre_id, documentation: {type: "Integer", desc: "ID of the genre of the book"}
+  expose :author, using: V1::Entities::AuthorEntity, documentation: {type: "Author", desc: "Author of the book"}
+  expose :genre, using: V1::Entities::GenreEntity, documentation: {type: "Genre", desc: "Genre of the book"}
 end

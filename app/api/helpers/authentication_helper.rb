@@ -20,7 +20,7 @@ module Helpers::AuthenticationHelper
   end
 
   def unauthorized_error!
-    error!("Unauthorized", 401)
+    error!("Access denied.", 401)
   end
 
   def authenticate!
