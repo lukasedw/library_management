@@ -1,4 +1,6 @@
 class V1::Entities::BookEntity < Grape::Entity
+  root "result"
+
   expose :id, documentation: {type: "Integer", desc: "ID of the book"}
   expose :title, documentation: {type: "String", desc: "Title of the book"}
   expose :description, documentation: {type: "String", desc: "Description of the book"}

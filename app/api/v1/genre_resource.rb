@@ -9,6 +9,7 @@ class V1::GenreResource < BaseAPI
       genre = Genre.new(declared(params))
       authorize genre, :create?
       genre.save!
+      status(201)
       present genre, with: V1::Entities::GenreEntity
     end
     desc "List all Genres"

@@ -14,6 +14,7 @@ class V1::BookResource < BaseAPI
       book = Book.new(declared(params))
       authorize book, :create?
       book.save!
+      status(201)
       present book, with: V1::Entities::BookEntity
     end
 
@@ -65,9 +66,9 @@ class V1::BookResource < BaseAPI
         authorize @book, :borrow?
         checkout_result = BookCheckoutService.call(@book.id, current_user.id)
         if checkout_result[:success]
-          success_render!(checkout_result[:message])
+          success!(checkout_result[:message], 201)
         else
-          error_render!(checkout_result[:message])
+          error!(checkout_result[:message], 422)
         end
       end
     end

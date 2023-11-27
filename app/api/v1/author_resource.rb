@@ -10,6 +10,7 @@ class V1::AuthorResource < BaseAPI
       author = Author.new(declared(params))
       authorize author, :create?
       author.save!
+      status(201)
       present author, with: V1::Entities::AuthorEntity
     end
 
