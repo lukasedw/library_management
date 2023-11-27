@@ -11,4 +11,13 @@
 FactoryBot.create(:user, :librarian, first_name: "Librarian", email: "librarian@test.com")
 FactoryBot.create(:user, :member, last_name: "Member", email: "member@test.com")
 
-FactoryBot.create_list(:book, 10)
+books = FactoryBot.create_list(:book, 5)
+
+users = FactoryBot.create_list(:user, 5, :member)
+
+users.each do |user|
+  books.each do |book|
+    FactoryBot.create(:book_transaction, user: user, book: book)
+  end
+end
+
