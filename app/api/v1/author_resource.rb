@@ -1,6 +1,6 @@
 class V1::AuthorResource < BaseAPI
   namespace :authors do
-    desc "Create an Author"
+    desc "Create an Author", security: [{Bearer: []}]
     params do
       requires :name, type: String, desc: "Author name"
       requires :description, type: String, desc: "Author description"
@@ -31,7 +31,7 @@ class V1::AuthorResource < BaseAPI
         present @author, with: V1::Entities::AuthorEntity
       end
 
-      desc "Update an Author"
+      desc "Update an Author", security: [{Bearer: []}]
       params do
         optional :name, type: String, desc: "Author name"
         optional :description, type: String, desc: "Author description"
@@ -43,7 +43,7 @@ class V1::AuthorResource < BaseAPI
         present @author, with: V1::Entities::AuthorEntity
       end
 
-      desc "Delete an Author"
+      desc "Delete an Author", security: [{Bearer: []}]
       delete do
         authenticate!
         authorize @author, :destroy?

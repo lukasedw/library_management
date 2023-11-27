@@ -41,6 +41,12 @@ gem "grape", "~> 2.0"
 # Model and other object representations for API endpoints in Grape [https://github.com/ruby-grape/grape-entity]
 gem "grape-entity", "~> 1.0"
 
+# Generate Swagger-compliant documentation for Grape APIs [https://github.com/ruby-grape/grape-swagger]
+gem "grape-swagger", "~> 2.0"
+
+# Exposes Grape::Entity representation for grape-swagger [https://github.com/ruby-grape/grape-swagger-entity]
+gem "grape-swagger-entity", "~> 0.5.2"
+
 # Object-oriented authorization for Rails applications [https://github.com/varvet/pundit]
 gem "pundit", "~> 2.3"
 

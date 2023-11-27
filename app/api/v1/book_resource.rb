@@ -1,6 +1,6 @@
 class V1::BookResource < BaseAPI
   namespace :books do
-    desc "Create a Book"
+    desc "Create a Book", security: [{Bearer: []}]
     params do
       requires :title, type: String, desc: "Title of the book"
       requires :description, type: String, desc: "Description of the book"
@@ -35,7 +35,7 @@ class V1::BookResource < BaseAPI
         present @book, with: V1::Entities::BookEntity
       end
 
-      desc "Update a Book"
+      desc "Update a Book", security: [{Bearer: []}]
       params do
         optional :title, type: String, desc: "Title of the book"
         optional :description, type: String, desc: "Description of the book"
@@ -51,7 +51,7 @@ class V1::BookResource < BaseAPI
         present @book, with: V1::Entities::BookEntity
       end
 
-      desc "Delete a Book"
+      desc "Delete a Book", security: [{Bearer: []}]
       delete do
         authenticate!
         authorize @book, :destroy?
@@ -59,7 +59,7 @@ class V1::BookResource < BaseAPI
         status 200
       end
 
-      desc "Borrow a Book"
+      desc "Borrow a Book", security: [{Bearer: []}]
       post :borrow do
         authenticate!
         authorize @book, :borrow?

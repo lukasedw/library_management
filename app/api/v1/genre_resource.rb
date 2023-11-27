@@ -1,6 +1,6 @@
 class V1::GenreResource < BaseAPI
   namespace :genres do
-    desc "Create a Genre"
+    desc "Create a Genre", security: [{Bearer: []}]
     params do
       requires :name, type: String, desc: "Genre name"
     end
@@ -27,7 +27,7 @@ class V1::GenreResource < BaseAPI
         present @genre, with: V1::Entities::GenreEntity
       end
 
-      desc "Update a Genre"
+      desc "Update a Genre", security: [{Bearer: []}]
       params do
         optional :name, type: String, desc: "Genre name"
       end
@@ -37,7 +37,7 @@ class V1::GenreResource < BaseAPI
         @genre.update!(declared(params, include_missing: false))
         present @genre, with: V1::Entities::GenreEntity
       end
-      desc "Delete a Genre"
+      desc "Delete a Genre", security: [{Bearer: []}]
       delete do
         authenticate!
         authorize @genre, :destroy?
