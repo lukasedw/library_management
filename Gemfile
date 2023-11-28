@@ -70,6 +70,8 @@ group :development, :test do
   gem "faker"
   # Provides simple one-liner tests for common Rails functionalities [https://github.com/thoughtbot/shoulda-matchers]
   gem "shoulda-matchers", "~> 5.3"
+  # Code coverage analysis tool for Ruby [https://github.com/simplecov-ruby/simplecov]
+  gem "simplecov", "~> 0.22.0", require: false
 end
 
 group :development do
