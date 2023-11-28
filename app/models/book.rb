@@ -7,8 +7,6 @@ class Book < ApplicationRecord
 
   validates :title, presence: true, uniqueness: true
   validates :isbn, presence: true, uniqueness: {case_sensitive: false}
-  validates :author, presence: true
-  validates :genre, presence: true
 
   enum state: {
     available: 0,

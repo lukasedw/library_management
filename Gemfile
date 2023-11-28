@@ -79,4 +79,6 @@ group :development do
   # gem "spring"
   # Enforce coding style guidelines with a Ruby style guide linter [https://github.com/testdouble/standard]
   gem "standard", "~> 1.32"
+  # Plugin for standard with rubocop-rails ruleset [https://github.com/standardrb/standard-rails]
+  gem "standard-rails", "~> 0.2.0"
 end
