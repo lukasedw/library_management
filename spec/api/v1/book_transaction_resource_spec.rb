@@ -18,7 +18,7 @@ RSpec.describe V1::BookTransactionResource, type: :request do
         headers: auth_headers
 
       expect(response.status).to eq(200)
-      expect(JSON.parse(response.body).size).to eq(BookTransaction.count)
+      expect(json_response.size).to eq(BookTransaction.count)
     end
 
     context "when the user is not authenticated" do
@@ -26,7 +26,7 @@ RSpec.describe V1::BookTransactionResource, type: :request do
         get endpoint
 
         expect(response.status).to eq(401)
-        expect(JSON.parse(response.body)["error"]).to eq("Access denied.")
+        expect(json_response["error"]).to eq("Access denied.")
       end
     end
 
@@ -38,7 +38,7 @@ RSpec.describe V1::BookTransactionResource, type: :request do
           headers: auth_headers
 
         expect(response.status).to eq(200)
-        expect(JSON.parse(response.body)["result"].size).to eq(1)
+        expect(json_response["result"].size).to eq(1)
       end
     end
   end
@@ -50,7 +50,7 @@ RSpec.describe V1::BookTransactionResource, type: :request do
           headers: auth_headers
 
         expect(response.status).to eq(200)
-        expect(JSON.parse(response.body)["book"]["title"]).to eq(book.title)
+        expect(json_response["book"]["title"]).to eq(book.title)
       end
     end
 
@@ -62,7 +62,7 @@ RSpec.describe V1::BookTransactionResource, type: :request do
           headers: auth_headers
 
         expect(response.status).to eq(404)
-        expect(JSON.parse(response.body)["error"]).to eq("We can't find the resource.")
+        expect(json_response["error"]).to eq("We can't find the resource.")
       end
     end
 
@@ -71,7 +71,7 @@ RSpec.describe V1::BookTransactionResource, type: :request do
         get member_endpoint
 
         expect(response.status).to eq(401)
-        expect(JSON.parse(response.body)["error"]).to eq("Access denied.")
+        expect(json_response["error"]).to eq("Access denied.")
       end
     end
 
@@ -84,7 +84,7 @@ RSpec.describe V1::BookTransactionResource, type: :request do
           headers: auth_headers
 
         expect(response.status).to eq(404)
-        expect(JSON.parse(response.body)["error"]).to eq("We can't find the resource.")
+        expect(json_response["error"]).to eq("We can't find the resource.")
       end
     end
   end
@@ -101,7 +101,7 @@ RSpec.describe V1::BookTransactionResource, type: :request do
           headers: auth_headers
 
         expect(response.status).to eq(200)
-        expect(JSON.parse(response.body)["success"]).to eq("Book returned successfully")
+        expect(json_response["success"]).to eq("Book returned successfully")
       end
 
       context "when the book transaction does not exist" do
@@ -112,7 +112,7 @@ RSpec.describe V1::BookTransactionResource, type: :request do
             headers: auth_headers
 
           expect(response.status).to eq(404)
-          expect(JSON.parse(response.body)["error"]).to eq("We can't find the resource.")
+          expect(json_response["error"]).to eq("We can't find the resource.")
         end
       end
     end
@@ -122,7 +122,7 @@ RSpec.describe V1::BookTransactionResource, type: :request do
         post "#{member_endpoint}/return"
 
         expect(response.status).to eq(401)
-        expect(JSON.parse(response.body)["error"]).to eq("Access denied.")
+        expect(json_response["error"]).to eq("Access denied.")
       end
     end
 
@@ -132,7 +132,7 @@ RSpec.describe V1::BookTransactionResource, type: :request do
           headers: auth_headers
 
         expect(response.status).to eq(403)
-        expect(JSON.parse(response.body)["error"]).to eq("You are not authorized to perform this action.")
+        expect(json_response["error"]).to eq("You are not authorized to perform this action.")
       end
     end
   end

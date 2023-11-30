@@ -31,8 +31,8 @@ RSpec.describe V1::AuthorResource, type: :request do
         }.to change(Author, :count).by(1)
 
         expect(response.status).to eq(201)
-        expect(JSON.parse(response.body)["name"]).to eq(author_params[:name])
-        expect(JSON.parse(response.body)["description"]).to eq(author_params[:description])
+        expect(json_response["name"]).to eq(author_params[:name])
+        expect(json_response["description"]).to eq(author_params[:description])
       end
     end
 
@@ -47,7 +47,7 @@ RSpec.describe V1::AuthorResource, type: :request do
         }.not_to change(Author, :count)
 
         expect(response.status).to eq(422)
-        expect(JSON.parse(response.body)).to include("error")
+        expect(json_response).to include("error")
       end
     end
 
@@ -62,7 +62,7 @@ RSpec.describe V1::AuthorResource, type: :request do
         }.not_to change(Book, :count)
 
         expect(response.status).to eq(400)
-        expect(JSON.parse(response.body)).to include("error")
+        expect(json_response).to include("error")
       end
     end
 
@@ -97,7 +97,7 @@ RSpec.describe V1::AuthorResource, type: :request do
       get endpoint
 
       expect(response.status).to eq(200)
-      expect(JSON.parse(response.body).size).to eq(Author.count)
+      expect(json_response.size).to eq(Author.count)
     end
   end
 
@@ -107,8 +107,8 @@ RSpec.describe V1::AuthorResource, type: :request do
         get member_endpoint
 
         expect(response.status).to eq(200)
-        expect(JSON.parse(response.body)["name"]).to eq(author_name)
-        expect(JSON.parse(response.body)["description"]).to eq(author_description)
+        expect(json_response["name"]).to eq(author_name)
+        expect(json_response["description"]).to eq(author_description)
       end
     end
 
@@ -119,7 +119,7 @@ RSpec.describe V1::AuthorResource, type: :request do
         get member_endpoint
 
         expect(response.status).to eq(404)
-        expect(JSON.parse(response.body)).to include("error")
+        expect(json_response).to include("error")
       end
     end
   end
@@ -141,8 +141,8 @@ RSpec.describe V1::AuthorResource, type: :request do
         expect(response.status).to eq(200)
         expect(Author.find(author_id).name).to eq(author_params[:name])
         expect(Author.find(author_id).description).to eq(author_params[:description])
-        expect(JSON.parse(response.body)["name"]).to eq(author_params[:name])
-        expect(JSON.parse(response.body)["description"]).to eq(author_params[:description])
+        expect(json_response["name"]).to eq(author_params[:name])
+        expect(json_response["description"]).to eq(author_params[:description])
       end
     end
 
@@ -168,7 +168,7 @@ RSpec.describe V1::AuthorResource, type: :request do
           headers: auth_headers
 
         expect(response.status).to eq(422)
-        expect(JSON.parse(response.body)).to include("error")
+        expect(json_response).to include("error")
       end
     end
 

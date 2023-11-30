@@ -27,11 +27,14 @@ require_relative "../config/environment"
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require "rspec/rails"
 
+Dir[Rails.root.join("spec", "support", "**", "*.rb")].sort.each { |f| require f }
+
 begin
   ActiveRecord::Migration.maintain_test_schema!
 rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
+
 RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
@@ -55,6 +58,9 @@ RSpec.configure do |config|
   config.after(:each) do
     Faker::UniqueGenerator.clear
   end
+
+  # Helpers
+  config.include RequestHelpers, type: :request
 end
 
 Shoulda::Matchers.configure do |config|

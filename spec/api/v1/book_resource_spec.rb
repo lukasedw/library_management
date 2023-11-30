@@ -36,7 +36,7 @@ RSpec.describe V1::BookResource, type: :request do
         }.to change(Book, :count).by(1)
 
         expect(response.status).to eq(201)
-        expect(JSON.parse(response.body)["title"]).to eq("New Book")
+        expect(json_response["title"]).to eq("New Book")
       end
     end
 
@@ -56,7 +56,7 @@ RSpec.describe V1::BookResource, type: :request do
         }.not_to change(Book, :count)
 
         expect(response.status).to eq(422)
-        expect(JSON.parse(response.body)).to include("error")
+        expect(json_response).to include("error")
       end
     end
 
@@ -72,7 +72,7 @@ RSpec.describe V1::BookResource, type: :request do
         }.not_to change(Book, :count)
 
         expect(response.status).to eq(400)
-        expect(JSON.parse(response.body)).to include("error")
+        expect(json_response).to include("error")
       end
     end
 
@@ -107,7 +107,7 @@ RSpec.describe V1::BookResource, type: :request do
       get endpoint
 
       expect(response.status).to eq(200)
-      expect(JSON.parse(response.body).size).to eq(Book.count)
+      expect(json_response.size).to eq(Book.count)
     end
 
     context "when there are no books" do
@@ -117,7 +117,7 @@ RSpec.describe V1::BookResource, type: :request do
         get endpoint
 
         expect(response.status).to eq(200)
-        expect(JSON.parse(response.body)["result"]).to eq([])
+        expect(json_response["result"]).to eq([])
       end
     end
   end
@@ -128,7 +128,7 @@ RSpec.describe V1::BookResource, type: :request do
         get member_endpoint
 
         expect(response.status).to eq(200)
-        expect(JSON.parse(response.body)["title"]).to eq(book_title)
+        expect(json_response["title"]).to eq(book_title)
       end
     end
 
@@ -139,7 +139,7 @@ RSpec.describe V1::BookResource, type: :request do
         get member_endpoint
 
         expect(response.status).to eq(404)
-        expect(JSON.parse(response.body)).to include("error")
+        expect(json_response).to include("error")
       end
     end
   end
@@ -160,7 +160,7 @@ RSpec.describe V1::BookResource, type: :request do
 
         expect(response.status).to eq(200)
         expect(Book.find(book_id).title).to eq(new_title)
-        expect(JSON.parse(response.body)["title"]).to eq(new_title)
+        expect(json_response["title"]).to eq(new_title)
       end
     end
 
@@ -185,7 +185,7 @@ RSpec.describe V1::BookResource, type: :request do
           headers: auth_headers
 
         expect(response.status).to eq(422)
-        expect(JSON.parse(response.body)).to include("error")
+        expect(json_response).to include("error")
       end
     end
 
@@ -267,7 +267,7 @@ RSpec.describe V1::BookResource, type: :request do
         post "#{member_endpoint}/borrow",
           headers: auth_headers
 
-        expect(JSON.parse(response.body)["success"]).to eq("Book checked out successfully")
+        expect(json_response["success"]).to eq("Book checked out successfully")
         expect(book_transaction.borrowed?).to be_truthy
         expect(response.status).to eq(201)
       end
@@ -311,7 +311,7 @@ RSpec.describe V1::BookResource, type: :request do
         post "#{member_endpoint}/borrow",
           headers: auth_headers
 
-        expect(JSON.parse(response.body)["error"]).to eq("Book is not available for checkout")
+        expect(json_response["error"]).to eq("Book is not available for checkout")
         expect(response.status).to eq(422)
       end
     end
@@ -325,7 +325,7 @@ RSpec.describe V1::BookResource, type: :request do
         post "#{member_endpoint}/borrow",
           headers: auth_headers
 
-        expect(JSON.parse(response.body)["error"]).to eq("Book is not available for checkout")
+        expect(json_response["error"]).to eq("Book is not available for checkout")
         expect(response.status).to eq(422)
       end
     end

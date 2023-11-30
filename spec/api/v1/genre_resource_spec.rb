@@ -29,7 +29,7 @@ RSpec.describe V1::GenreResource, type: :request do
         }.to change(Genre, :count).by(1)
 
         expect(response.status).to eq(201)
-        expect(JSON.parse(response.body)["name"]).to eq(genre_params[:name])
+        expect(json_response["name"]).to eq(genre_params[:name])
       end
     end
 
@@ -42,7 +42,7 @@ RSpec.describe V1::GenreResource, type: :request do
         }.not_to change(Genre, :count)
 
         expect(response.status).to eq(422)
-        expect(JSON.parse(response.body)).to include("error")
+        expect(json_response).to include("error")
       end
     end
 
@@ -74,7 +74,7 @@ RSpec.describe V1::GenreResource, type: :request do
       get endpoint
 
       expect(response.status).to eq(200)
-      expect(JSON.parse(response.body).size).to eq(Genre.count)
+      expect(json_response.size).to eq(Genre.count)
     end
   end
 
@@ -84,7 +84,7 @@ RSpec.describe V1::GenreResource, type: :request do
         get member_endpoint
 
         expect(response.status).to eq(200)
-        expect(JSON.parse(response.body)["name"]).to eq(genre_name)
+        expect(json_response["name"]).to eq(genre_name)
       end
     end
 
@@ -95,7 +95,7 @@ RSpec.describe V1::GenreResource, type: :request do
         get member_endpoint
 
         expect(response.status).to eq(404)
-        expect(JSON.parse(response.body)).to include("error")
+        expect(json_response).to include("error")
       end
     end
   end
@@ -115,7 +115,7 @@ RSpec.describe V1::GenreResource, type: :request do
 
         expect(response.status).to eq(200)
         expect(Genre.find(genre_id).name).to eq(genre_params[:name])
-        expect(JSON.parse(response.body)["name"]).to eq(genre_params[:name])
+        expect(json_response["name"]).to eq(genre_params[:name])
       end
     end
 
@@ -138,7 +138,7 @@ RSpec.describe V1::GenreResource, type: :request do
           headers: auth_headers
 
         expect(response.status).to eq(422)
-        expect(JSON.parse(response.body)).to include("error")
+        expect(json_response).to include("error")
       end
     end
 

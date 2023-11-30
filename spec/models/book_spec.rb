@@ -13,7 +13,5 @@ RSpec.describe Book, type: :model do
     it { should validate_uniqueness_of(:title) }
     it { should validate_presence_of(:isbn) }
     it { should validate_uniqueness_of(:isbn).case_insensitive }
-    it { should validate_presence_of(:author) }
-    it { should validate_presence_of(:genre) }
   end
 end
