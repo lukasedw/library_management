@@ -59,6 +59,12 @@ gem "aasm", "~> 5.5"
 # Hook into ActiveRecord's commit callbacks from non-model classes (work with aasm) [https://github.com/Envek/after_commit_everywhere]
 gem "after_commit_everywhere", "~> 1.3"
 
+# Efficient background job processing [https://github.com/mperham/sidekiq]
+gem "sidekiq", "~> 7.2"
+
+# Schedule recurring jobs with Sidekiq [https://github.com/ondrejbartas/sidekiq-cron]
+gem "sidekiq-cron", "~> 1.11"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[mri windows]

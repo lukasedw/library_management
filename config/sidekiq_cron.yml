@@ -1,0 +1,4 @@
+overdue_book_transaction_job:
+  cron: "0 1 * * *"
+  class: "OverdueBookTransactionJob"
+  queue: "default"
