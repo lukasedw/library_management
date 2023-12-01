@@ -64,6 +64,8 @@ group :development, :test do
   gem "debug", platforms: %i[mri windows]
   # Testing framework for Rails [https://github.com/rspec/rspec-rails]
   gem "rspec-rails"
+  # Formatter for RSpec result [https://drieam.github.io/rspec-github/]
+  gem "rspec-github", require: false
   # Simplifies creating complex factory objects in tests [https://github.com/thoughtbot/factory_bot_rails]
   gem "factory_bot_rails"
   # Generate fake data for tests and seeds [https://github.com/faker-ruby/faker]
@@ -72,13 +74,13 @@ group :development, :test do
   gem "shoulda-matchers", "~> 5.3"
   # Code coverage analysis tool for Ruby [https://github.com/simplecov-ruby/simplecov]
   gem "simplecov", "~> 0.22.0", require: false
+  # Enforce coding style guidelines with a Ruby style guide linter [https://github.com/testdouble/standard]
+  gem "standard", "~> 1.32"
+  # Plugin for standard with rubocop-rails ruleset [https://github.com/standardrb/standard-rails]
+  gem "standard-rails", "~> 0.2.0"
 end
 
 group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
-  # Enforce coding style guidelines with a Ruby style guide linter [https://github.com/testdouble/standard]
-  gem "standard", "~> 1.32"
-  # Plugin for standard with rubocop-rails ruleset [https://github.com/standardrb/standard-rails]
-  gem "standard-rails", "~> 0.2.0"
 end

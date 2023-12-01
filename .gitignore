@@ -36,3 +36,4 @@
 /.idea
 
 /coverage
+/config/credentials/test.key
